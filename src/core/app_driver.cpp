@@ -65,6 +65,7 @@ bool AppDriver::get_bool_env_var(const char* name, bool default_value) {
         value.begin(), value.end(), value.begin(), [](unsigned char c) { return std::tolower(c); });
 
     if (value == "true" || value == "1" || value == "on") { return true; }
+    if (value == "false" || value == "0" || value == "off") { return false; }
   }
 
   return default_value;
