@@ -638,6 +638,11 @@ bool AppDriver::collect_connections(holoscan::FragmentGraph& fragment_graph) {
   std::unordered_set<holoscan::FragmentGraph::NodeType> visited_nodes;
   visited_nodes.reserve(fragments.size());
 
+  // Initialize connection_map_ for each fragment, regardless of whether it has connections
+  for (auto& node : fragments) {
+    connection_map_[node] = std::vector<std::shared_ptr<ConnectionItem>>();
+  }
+
   // Initialize the indegrees of all nodes in the graph and add root fragments to the worklist.
   for (auto& node : fragments) {
     indegrees[node] = fragment_graph.get_previous_nodes(node).size();
